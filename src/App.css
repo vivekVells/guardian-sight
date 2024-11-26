@@ -1,2 +1,15 @@
 /* Start writing your main Popup css here */
 /* Although this templates comes preconfigured with tailwind css for faster ui development */
+
+.popup-container {
+  color: white;
+  background-color: #2b6cae; /* Light background for a clean look */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 50px; /* Space inside the container */
+  margin: 20px; /* Space around the container */
+  text-align: center; /* Center-align content */
+  max-width: 600px; /* Restrict maximum width for a neat layout */
+  border: 1px solid #ddd; /* Light border for definition */
+  font-family: 'Arial', sans-serif; /* Clean font */
+}
