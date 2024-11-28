@@ -1,0 +1,19 @@
+{
+  "exclude": ["node_modules", "dist", "server/**/*.test.ts"],
+  "include": ["**/*.ts"],
+  "compilerOptions": {
+    "types": ["node", "express"],
+    "target": "ESNext",
+    "module": "CommonJS",
+    "rootDir": "./",
+    "moduleResolution": "Node",
+    "typeRoots": ["./node_modules/@types"],
+    "sourceMap": true,
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true
+  }
+}
