@@ -29,6 +29,7 @@
   "dependencies": {
     "compression": "^1.7.5",
     "express": "^4.21.1",
-    "express-rate-limit": "^7.4.1"
+    "express-rate-limit": "^7.4.1",
+    "playwright-chromium": "^1.49.0"
   }
 }
