@@ -42,7 +42,11 @@ app.get('/scrape', async (req, res) => {
     await page.goto(url, { waitUntil: 'networkidle' });
     await page.waitForLoadState();
 
-    const textContent = await page.evaluate(() => document.body.innerText);
+    const textContent = await page.evaluate(() => {
+      let content = document.body.innerText;
+      return content.replace(/\n/g, '|');
+    });
+    
 
     // const parsedUrl = new URL(url);
     // const hostname = parsedUrl.hostname;
