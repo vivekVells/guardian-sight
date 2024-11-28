@@ -20,6 +20,7 @@
   "homepage": "https://github.com/vivekVells/guardian-sight#readme",
   "devDependencies": {
     "@types/compression": "^1.7.5",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.0",
     "rimraf": "^6.0.1",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "compression": "^1.7.5",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "express-rate-limit": "^7.4.1",
     "playwright-chromium": "^1.49.0"
