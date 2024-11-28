@@ -34,22 +34,23 @@ app.get('/scrape', async (req, res) => {
 
   try {
     const browser = await chromium.launch({ headless: true });
-    const context = await browser.newContext();
+    const context = await browser.newContext({
+      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+    });
     const page = await context.newPage();
-
-    const parsedUrl = new URL(url);
-    const hostname = parsedUrl.hostname;
-    const domainParts = hostname.split('.');
-    const baseDomain = domainParts.slice(-2).join('.');
 
     await page.goto(url, { waitUntil: 'networkidle' });
     await page.waitForLoadState();
 
     const textContent = await page.evaluate(() => document.body.innerText);
 
-    await mkdir('scraped-content', { recursive: true }).then(() =>
-      writeFile(join('scraped-content', `${baseDomain}-privacy-document.txt`), textContent, 'utf-8')
-    );
+    // const parsedUrl = new URL(url);
+    // const hostname = parsedUrl.hostname;
+    // const domainParts = hostname.split('.');
+    // const baseDomain = domainParts.slice(-2).join('.');
+    //await mkdir('scraped-content', { recursive: true }).then(() =>
+    //  writeFile(join('scraped-content', `${baseDomain}-privacy-document.txt`), textContent, 'utf-8')
+    //);
 
 
     await browser.close();
