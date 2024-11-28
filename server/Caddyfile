@@ -1,0 +1,55 @@
+#### Commands for reference to run caddy file 
+# Prerequisites: Run the followings
+## sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+## curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key'
+## sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt'
+## sudo tee /etc/apt/sources.list.d/caddy-stable.list && sudo apt update && sudo apt install caddy
+# Steps to enable caddy:
+# Store the caddy contents in /etc/caddy/Caddyfile
+# Run sudo caddy start --config /etc/caddy/Caddyfile --adapter caddyfile
+####
+
+# The Caddyfile is an easy way to configure your Caddy web server.
+#
+# Unless the file starts with a global options block, the first
+# uncommented line is always the address of your site.
+#
+# To use your own domain name (with automatic HTTPS), first make
+# sure your domain's A/AAAA DNS records are properly pointed to
+# this machine's public IP, then replace ":80" below with your
+# domain name.
+
+:80 {
+        redir https://{host}{uri} 308
+        # Set this path to your site's directory.
+        #root * /usr/share/caddy
+
+        # Enable the static file server.
+        #file_server
+
+        # Another common task is to set up a reverse proxy:
+        # reverse_proxy localhost:8080
+
+        # Or serve a PHP site through php-fpm:
+        # php_fastcgi localhost:9000
+}
+
+guardian-sight-api.adityakarnam.me {
+    # respond "Caddy is working!" 200
+    reverse_proxy localhost:3005
+
+    # Logging (optional)
+    log {
+        output file /var/log/caddy/guardian-sight-api.log
+        format json
+    }
+
+    # Handle Errors (optional)
+    handle_errors {
+        respond "An unexpected error occurred." 500
+    }
+}
+
+
+# Refer to the Caddy docs for more information:
+# https://caddyserver.com/docs/caddyfile
