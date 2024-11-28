@@ -6,5 +6,6 @@ npm install
 echo "Building"
 npm run build
 echo "Restarting server"
-npx pm2 restart guardian-sight-api
+npx pm2 stop guardian-sight-api
+npx pm2 start guardian-sight-api
 echo "Deployed successfully"
