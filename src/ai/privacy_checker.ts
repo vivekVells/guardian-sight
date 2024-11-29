@@ -15,10 +15,10 @@ type Config = {
 
 export const run_privacy_checker = async (
     domContent: string,
-    config: Config,
+    { reuse_session }: Config,
 ) => {
     console.log("Received DOM content: ", domContent);
-    const privacy_checker_session = await initialize(config.reuse_session);
+    const privacy_checker_session = await initialize(reuse_session);
     const PROMPT = prepare_prompt(PRIVACY_CHECKER_PROMPT_TEMPLATE, domContent);
     console.log("running prompt: ", PROMPT);
     const response = await privacy_checker_session.prompt(PROMPT);
