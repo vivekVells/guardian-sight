@@ -1,7 +1,7 @@
 import { SCRAPE_URL_CADDY } from "./constants";
 
 // Function to retrieve unique privacy URLs
-export const getUniquePrivacyLinks = () => {
+const getUniquePrivacyLinks = () => {
   const links = document.querySelectorAll("a");
   const privacyLinks = new Set();
   let foundPrivacyText = false;
