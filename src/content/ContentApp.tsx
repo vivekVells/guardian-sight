@@ -6,7 +6,7 @@ function ContentApp() { // start building your content view here, like any other
   
   useEffect(() => {
     // Invoke the createAISession method when the component mounts
-    run_privacy_checker(PRIVACY_CHCEKER_TEXT, { "reuse_session": false })
+    run_privacy_checker(PRIVACY_CHCEKER_TEXT, { reuse_session: false })
       .then((response) => {
         console.log('Privacy checker says:', response);
       })

@@ -9,9 +9,9 @@ const initialize = async (reuse_session: boolean = true) => {
     return await createAISession(ROLE, {}, reuse_session);
 }
 
-export type ConfigKeyType = 'reuse_session';
-
-type Config = Record<ConfigKeyType, boolean>;
+type Config = {
+    reuse_session: boolean,
+}
 
 export const run_privacy_checker = async (
     domContent: string,
