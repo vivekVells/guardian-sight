@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; // Import useEffect
+import { useEffect } from 'react'; // Import useEffect
 import { run_privacy_checker } from '../ai/privacy_checker';
 const PRIVACY_CHCEKER_TEXT = "Privacy Statement Cookie Statement Terms of Use Expedia, Inc. is not responsible for content on external Web sites.";
 
