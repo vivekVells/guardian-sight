@@ -2,6 +2,8 @@
 
 export type AIRoleType = 'privacy_checker';
 
+export const INPUT_PLACEHOLDER = "{input}";
+
 const sessionMap: Record<AIRoleType, unknown> = {
     privacy_checker: undefined,
 };
@@ -35,4 +37,8 @@ export const createAISession = async (
     console.error('Error creating AI session:', error);
     return null;
   }
+};
+
+export const prepare_prompt = (promptTemplate: string, userInput: string) => {
+  return promptTemplate.replace(INPUT_PLACEHOLDER, userInput);
 };

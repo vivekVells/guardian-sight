@@ -1,6 +1,7 @@
 // Privacy checker
 
-import { createAISession } from ".";
+import { createAISession, prepare_prompt } from ".";
+import { PRIVACY_CHECKER_PROMPT_TEMPLATE } from "./prompts/privacy_checker";
 
 export const ROLE = "privacy_checker";
 
@@ -10,7 +11,7 @@ const initialize = async (reuse_session: boolean = true) => {
 
 export type ConfigKeyType = 'reuse_session';
 
-type Config = Record<ConfigKeyType, any>;
+type Config = Record<ConfigKeyType, boolean>;
 
 export const run_privacy_checker = async (
     domContent: string,
@@ -18,7 +19,7 @@ export const run_privacy_checker = async (
 ) => {
     console.log("Received DOM content: ", domContent);
     const privacy_checker_session = await initialize(config.reuse_session);
-    const PROMPT = `IDENTIFY IF THERE IS A REFERENCE TO PRIVACY IN THE TEXT : ${domContent} REPLY WITH ONLY A 'yes' OR 'no'. Keep it lowercased.`;
+    const PROMPT = prepare_prompt(PRIVACY_CHECKER_PROMPT_TEMPLATE, domContent);
     console.log("running prompt: ", PROMPT);
     const response = await privacy_checker_session.prompt(PROMPT);
     console.log("AI LLM Response: ", response);

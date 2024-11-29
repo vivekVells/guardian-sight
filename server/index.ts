@@ -1,8 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import { chromium } from 'playwright-chromium';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
 
 const app = express();
 const PORT = 3005;
@@ -22,7 +20,7 @@ app.listen(PORT, IPADDRESS, () => {
   console.log(`Server is running on http://${IPADDRESS}:${PORT}`);
 });
 
-// @ts-ignore
+// @ts-expect-error No error is expected.
 app.get('/scrape', async (req, res) => {
   const url = req.query.url as string;
   console.log(`Scraping ${url}... to retrieve text content!`);
@@ -43,7 +41,7 @@ app.get('/scrape', async (req, res) => {
     await page.waitForLoadState();
 
     const textContent = await page.evaluate(() => {
-      let content = document.body.innerText;
+      const content = document.body.innerText;
       return content.replace(/\n/g, '|');
     });
     
