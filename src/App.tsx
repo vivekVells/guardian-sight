@@ -2,7 +2,6 @@ import './App.css';
 import guardian_sight_logo from './assets/icons/gaurdian_sight_logo.png';
 
 function App() {
-
   return (
     <div className="popup-container">
       <img src={guardian_sight_logo} />
