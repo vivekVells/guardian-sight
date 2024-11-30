@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 import {
   getStatementAndUrlsContainingKeyword,
   normalizePrivacyStatements,
@@ -9,6 +11,7 @@ import { run_privacy_checker } from "../../ai/privacy_checker";
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<string>("");
+  const notyf = new Notyf();
 
   const findSignUpStatement = async (
     statements: PrivacyInfo[]
@@ -99,6 +102,15 @@ const PrivacyInsight = () => {
   useEffect(() => {
     getSummary();
   }, []);
+
+  useEffect(() => {
+    summary &&
+      notyf.success({
+        message: summary.slice(0, 250),
+        duration: 100000, // Set duration to null to keep the notification visible indefinitely
+        dismissible: true, // Make the notification dismissable);
+      });
+  }, [summary]);
 
   return (
     <div>

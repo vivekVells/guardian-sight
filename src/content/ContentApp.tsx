@@ -1,5 +1,5 @@
-function ContentApp() {
+const ContentApp = () => {
   return <></>;
-}
+};
 
 export default ContentApp;
