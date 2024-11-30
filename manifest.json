@@ -1,16 +1,29 @@
 {
   "manifest_version": 3,
   "name": "Gaurdian Sight",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "action": { "default_popup": "index.html" },
   "background": {
     "service_worker": "./src/background/background.ts"
   },
-  "options_page" : "src/optionsPage/optionsPage.html",
+  "options_page": "src/optionsPage/optionsPage.html",
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "permissions": [
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
   "content_scripts": [
     {
-      "js": ["src/content/content.tsx"],
-      "matches": ["<all_urls>"]
+      "js": [
+        "src/content/content.tsx"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "icons": {
