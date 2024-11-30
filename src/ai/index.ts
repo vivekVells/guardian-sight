@@ -1,8 +1,8 @@
 // AI Interface
 
-export type AIRoleType = 'privacy_checker';
+export type AIRoleType = "privacy_checker";
 
-export const INPUT_PLACEHOLDER = '{input}';
+export const INPUT_PLACEHOLDER = "{input}";
 
 const sessionMap: Record<AIRoleType, unknown> = {
   privacy_checker: undefined,
@@ -27,14 +27,14 @@ export const createAISession = async (
   modelArgs: object = {},
   reuse_session: boolean = true
 ) => {
-  console.log('Before try catch: ', { sessionMap });
+  console.log("Before try catch: ", { sessionMap });
   try {
     return (
       (reuse_session && sessionMap[role]) ||
       (sessionMap[role] = await initializeAISession(modelArgs))
     );
   } catch (error) {
-    console.error('Error creating AI session:', error);
+    console.error("Error creating AI session:", error);
     return null;
   }
 };
