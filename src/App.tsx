@@ -1,5 +1,5 @@
-import './App.css';
-import guardian_sight_logo from './assets/icons/gaurdian_sight_logo.png';
+import "./App.css";
+import guardian_sight_logo from "./assets/icons/gaurdian_sight_logo.png";
 
 function App() {
   return (

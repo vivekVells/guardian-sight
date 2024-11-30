@@ -4,15 +4,22 @@ import ReactDOM from "react-dom/client";
 // but if you want to use tailwind in content app, import the index.css file
 import "./content.css";
 import ContentApp from "./ContentApp";
+import PrivacyInsight from "../component/privacy/PrivacyInsight";
 
 const root = document.createElement("div");
 root.id = "crx-root";
 document.body.appendChild(root);
 
-console.log("hello world from content script");
+// @ts-ignore
+if (!window.__CONTENT_SCRIPT_INJECTED__) {
+  // @ts-ignore
+  window.__CONTENT_SCRIPT_INJECTED__ = true;
+  console.log("Content script initialized");
+}
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
+    <PrivacyInsight />
     <ContentApp />
   </React.StrictMode>
 );
