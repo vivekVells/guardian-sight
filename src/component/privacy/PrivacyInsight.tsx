@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Notyf } from "notyf"; // Import Notyf
-import "notyf/notyf.min.css"; // Import the Notyf CSS for styling
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 import {
   getStatementAndUrlsContainingKeyword,
   normalizePrivacyStatements,
