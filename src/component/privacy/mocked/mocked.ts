@@ -1,0 +1,15 @@
+export const mockedStatementContents =
+  "Privacy Policy\nWe updated our Privacy Policy on November 14, 2024. View our previous policy.\nWhat is the Privacy Policy and what does it cover?\nEffective November 14, 2024 | View printable version | See previous versions\nRead the United States Regional Privacy Notice for more details about how we handle Personal Information and how to exercise your rights.\nHighlights\nWe at Meta want you to understand what information we collect, and how we use and share it. That’s why we encourage you to read our Privacy Policy. This helps you use Meta Products in the way that’s right for you.\nIn the Privacy Policy, we explain how we collect, use, share, retain and transfer information. We also let you know your rights. Each section of this Policy includes helpful examples and simpler language to make our practices easier to understand. We’ve also added links to resources where you can learn more about the privacy topics that interest you.\nIt's important to us that you know how to control your privacy, so we also show you where you can manage your information in the settings of the Meta Products you use. You can update these settings to shape your experience.\nRead the full Policy below.\nWhat Products does this Policy cover?\nLearn more in Privacy Center about managing your privacy\nWhat information do we collect?\nHighlights\nThe information we collect and process about you depends on how you use our Products. For example, we collect different information if you sell furniture on Marketplace than if you post a reel on Instagram. When you use our Products, we collect some information about you even if you don't have an account.\nHere's the information we collect:\nYour activity and information you provide\nFriends, followers and other connections\nApp, browser and device information\nInformation from partners, vendors and other third parties\nWhat if you don’t let us collect certain information?\nSome information is required for our Products to work. Other information is optional, but without it, the quality of your experience might be affected.\nLearn more\nWhat if the information we collect doesn’t identify individuals?\nIn some cases information is de-identified, aggregated, or anonymized by third parties so that it no longer identifies individuals before it’s made available to us.";
+
+export const mockedStatements = [
+  {
+    statement:
+      "By clicking Sign Up, you agree to our Terms , Privacy Policy and Cookies Policy . You may receive SMS Notifications from us and can opt out any time.",
+    url: "https://www.facebook.com/about/privacy/update",
+  },
+  {
+    statement:
+      "Sign Up Log In Messenger Facebook Lite Video Places Games Marketplace Meta Pay Meta Store Meta Quest Ray-Ban Meta Meta AI Instagram Threads Fundraisers Services Voting Information Center Privacy Policy Consumer Health Privacy Privacy Center Groups About Create ad Create Page Developers Careers Cookies Ad choices Terms Help Contact Uploading &amp; Non-Users Settings Activity log",
+    url: "https://www.facebook.com/privacy/policy/?entry_point=facebook_page_footer",
+  },
+];

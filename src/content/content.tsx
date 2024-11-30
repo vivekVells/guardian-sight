@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 // import "../index.css"; //commented to prevent tailwind styles leaking into the webpage
 // but if you want to use tailwind in content app, import the index.css file
 import "./content.css";
-import ContentApp from "./ContentApp";
+// import ContentApp from "./ContentApp";
+import PrivacyInsight from "../component/privacy/PrivacyInsight";
 
 const root = document.createElement("div");
 root.id = "crx-root";
@@ -18,6 +19,7 @@ if (!window.__CONTENT_SCRIPT_INJECTED__) {
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <ContentApp />
+    <PrivacyInsight />
+    {/* <ContentApp /> */}
   </React.StrictMode>
 );
