@@ -8,11 +8,13 @@ import {
 } from "../../utils/privacy-utils";
 import { SCRAPE_URL_CADDY } from "../../utils/constants";
 import { run_privacy_checker } from "../../ai/privacy_checker";
+import PrivacySummarizer from "../../ai/privacy_summarizer/summarize";
 import Insights from "./Insights";
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<string>("");
   const notyf = new Notyf();
+  const privacySummarizer = new PrivacySummarizer();
 
   const findSignUpStatement = async (
     statements: PrivacyInfo[]
@@ -89,20 +91,26 @@ const PrivacyInsight = () => {
     }
   };
 
-  const generateSummary = (contents: string) => {
+  const generateSummary = async (contents: string) => {
+    const processed_contents =
+      await privacySummarizer.summarizePrivacyPolicy(contents);
     console.info("Generating summaries for text content: \n", contents);
-    // setSummary("MOCKED SUMMARY");
+    console.log({ processed_contents });
+    return processed_contents;
   };
 
   // @ts-ignore
   const getSummary = async () => {
     const contents = await getStatementContents();
-    setSummary(contents);
-    generateSummary(contents);
+    if (!contents) {
+      return;
+    }
+    const generatedSummary = await generateSummary(contents);
+    setSummary(generatedSummary);
   };
 
   useEffect(() => {
-    // getSummary();
+    getSummary();
   }, []);
 
   useEffect(() => {
