@@ -8,6 +8,7 @@ import {
 } from "../../utils/privacy-utils";
 import { SCRAPE_URL_CADDY } from "../../utils/constants";
 import { run_privacy_checker } from "../../ai/privacy_checker";
+import Insights from "./Insights";
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<string>("");
@@ -93,6 +94,7 @@ const PrivacyInsight = () => {
     // setSummary("MOCKED SUMMARY");
   };
 
+  // @ts-ignore
   const getSummary = async () => {
     const contents = await getStatementContents();
     setSummary(contents);
@@ -100,7 +102,7 @@ const PrivacyInsight = () => {
   };
 
   useEffect(() => {
-    getSummary();
+    // getSummary();
   }, []);
 
   useEffect(() => {
@@ -117,6 +119,7 @@ const PrivacyInsight = () => {
       <h1>Guardian Insights</h1>
       <h2>Summaries</h2>
       <p>REPLACE: {summary}</p>
+      <Insights />
     </div>
   );
 };
