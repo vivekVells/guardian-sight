@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Drawer, Space, Typography, Progress } from "antd";
 import MarkdownTypewriter from "./TypeWriter";
 
-const Insights: React.FC = () => {
-  const [open, setOpen] = useState(false);
+interface InsightsProps {
+  shouldShow?: boolean;
+  summaryMock: string;
+}
+
+const Insights: React.FC<InsightsProps> = ({
+  shouldShow = false,
+  summaryMock,
+}) => {
+  const [open, setOpen] = useState(shouldShow);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [summary, setSummary] = useState<string | null>(null);
@@ -17,13 +25,12 @@ const Insights: React.FC = () => {
     "Here’s what you’re signing up for:",
   ];
 
-  const summaryMock = `
-* You can update settings to personalize your experience within Meta Products.
-* The complete Privacy Policy is accessible at the end of this document.
-* The policy covers a range of Meta Products, including Marketplace and Instagram.
-* Learn more about privacy management within the Privacy Center.
-* Meta collects information based on your product usage and provided information.
-  `;
+  summaryMock = summaryMock ?? "LOADING>>>>>>....";
+  // Add a line break to the first one
+  // summaryMock = summaryMock.replace(/^(\* .*)/, "$1  ");
+  // Add a line break to the first bullet point
+  summaryMock = ` ${summaryMock}`;
+  console.log({ summaryMock });
 
   const processSteps = async () => {
     setLoading(true);
@@ -49,6 +56,10 @@ const Insights: React.FC = () => {
     setSummary(null);
     setLoading(false);
   };
+
+  useEffect(() => {
+    setOpen(shouldShow);
+  }, [shouldShow]);
 
   return (
     <>
@@ -92,6 +103,14 @@ const Insights: React.FC = () => {
             Ready to analyze privacy policies.
           </Typography.Paragraph>
         )}
+        <Typography.Title>FINAL EXPECTED OUTPUT</Typography.Title>
+        <br />
+        <br />
+        <br />
+        {summaryMock}
+        <Typography.Paragraph>
+          <MarkdownTypewriter speed={99} content={summaryMock} />
+        </Typography.Paragraph>
       </Drawer>
     </>
   );

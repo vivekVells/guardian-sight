@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Notyf } from "notyf";
-import "notyf/notyf.min.css";
 import {
   getStatementAndUrlsContainingKeyword,
   normalizePrivacyStatements,
@@ -13,7 +11,7 @@ import Insights from "./Insights";
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<string>("");
-  const notyf = new Notyf();
+  const [displayInsight, setDisplayInsight] = useState<boolean>(false);
   const privacySummarizer = new PrivacySummarizer();
 
   const findSignUpStatement = async (
@@ -105,6 +103,7 @@ const PrivacyInsight = () => {
     if (!contents) {
       return;
     }
+    setDisplayInsight(true);
     const generatedSummary = await generateSummary(contents);
     setSummary(generatedSummary);
   };
@@ -113,21 +112,12 @@ const PrivacyInsight = () => {
     getSummary();
   }, []);
 
-  useEffect(() => {
-    summary &&
-      notyf.success({
-        message: summary.slice(0, 250),
-        duration: 100000, // Set duration to null to keep the notification visible indefinitely
-        dismissible: true, // Make the notification dismissable);
-      });
-  }, [summary]);
-
   return (
     <div>
       <h1>Guardian Insights</h1>
       <h2>Summaries</h2>
       <p>REPLACE: {summary}</p>
-      <Insights />
+      <Insights summaryMock={summary} shouldShow={displayInsight} />
     </div>
   );
 };
