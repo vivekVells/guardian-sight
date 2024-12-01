@@ -12,6 +12,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@langchain/textsplitters": "^0.1.0",
     "antd": "^5.22.2",
     "chrome-types": "^0.1.322",

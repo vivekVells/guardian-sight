@@ -1,13 +1,12 @@
-import { createAISession, prepare_prompt } from "..";
+import { createAISession } from "..";
 import { IMPACT_STATEMENT_PROMPT } from "./prompt";
 
 export const ROLE = "impact_statement_generator";
 
 class ImpactStatementGenerator {
-  public async generateImpactStatements(text: string): Promise<Array<string>> {
+  public async generateImpactStatements(): Promise<Array<string>> {
     const _ai = await createAISession(ROLE, {}, false);
-    const prompt = prepare_prompt(IMPACT_STATEMENT_PROMPT, text);
-    const response = _ai.prompt(prompt);
+    const response = await _ai.prompt(IMPACT_STATEMENT_PROMPT);
 
     // Split the response into individual impact statements
     const impactStatements = response.split("#$$#");

@@ -10,33 +10,6 @@ export interface PrivacyPolicyStage {
 // Define the array type based on the interface
 export type PrivacyPolicyStagesArray = PrivacyPolicyStage[];
 
-// Example of the array with the defined type
-export const PRIVACY_POLICY_STAGE_MAPPED_MSG: PrivacyPolicyStagesArray = [
-  { key: "DETECT_SIGNUP", message: "Detecting the sign-up flow..." },
-  {
-    key: "SEARCH_PRIVACY_POLICY",
-    message: "Searching for the relevant privacy policy...",
-  },
-  {
-    key: "FOUND_PRIVACY_POLICY",
-    message:
-      "Privacy policy found: [https://example.com/privacy-policy](https://example.com/privacy-policy)",
-  },
-  {
-    key: "RETRIEVE_POLICY_CONTENT",
-    message: "Retrieving the privacy policy content...",
-  },
-  {
-    key: "ANALYZE_CONTENT",
-    message: "Analyzing the retrieved content for key insights...",
-  },
-  {
-    key: "EXTRACT_KEY_POINTS",
-    message: "Extracting key points for your review...",
-  },
-  { key: "SUMMARY_INTRO", message: "Summary of what you're signing up for:" },
-];
-
 export const PRIVACY_IMPORTANCE_STATEMENTS = [
   {
     point:
