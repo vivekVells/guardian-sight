@@ -1,6 +1,6 @@
 import BulletConsolidator from "../bullet_consolidator/stage";
 import BulletGenerator from "../bullet_generator/stage";
-import SummarizerPresenter from "../summarizer_presenter/bullet_generator/stage";
+import SummarizerPresenter from "../summarizer_presenter/stage";
 
 export const ROLE = "privacy_summarizer";
 
