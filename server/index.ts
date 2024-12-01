@@ -1,10 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import { chromium } from 'playwright-chromium';
+import apicache from 'apicache';
 
 const app = express();
 const PORT = 3005;
 const IPADDRESS = "0.0.0.0";
+const cache = apicache.middleware;
 
 // Enable CORS for all origins
 app.use(cors());
@@ -21,7 +23,7 @@ app.listen(PORT, IPADDRESS, () => {
 });
 
 // @ts-expect-error No error is expected.
-app.get('/scrape', async (req, res) => {
+app.get('/scrape', cache('30 minutes'), async (req, res) => {
   const url = req.query.url as string;
   console.log(`Scraping ${url}... to retrieve text content!`);
 
