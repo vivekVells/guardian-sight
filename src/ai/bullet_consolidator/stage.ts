@@ -11,13 +11,15 @@ class BulletConsolidator {
       {
         chunkSize: 3000,
         chunkOverlap: 100,
+        iteration_limit: 10,
+        iteration_output_token_limit: 1000,
       },
       BULLET_CONSOLIDATOR_PROMPT_TEMPLATE
     );
   }
 
   public async consolidateBulletPoints(text: string): Promise<string> {
-    const response = this.cag.generate_sequential(text);
+    const response = this.cag.generate_recursive(text);
     return response;
   }
 }
