@@ -8,29 +8,12 @@ import {
 } from "../../utils/privacy-utils";
 import { SCRAPE_URL_CADDY } from "../../utils/constants";
 import { run_privacy_checker } from "../../ai/privacy_checker";
-import CAG from "../../ai/cag/interface";
-
-const PROMPT_TEMPLATE = `
-SUMMARIZE THE BELOW PRIVACY POLICY STATEMENT TEXT AND EXTRACT CRITICAL INFORMATION.
-AND CREATE A LIST OF BULLET POINTS FOR THE SAME. DO NOT EXCEED MORE THAN 20 BULLET POINTS.
-LIST THEM IN A SEQUENTIAL ORDER AND SEPARATE THEM BY A NEW LINE.
-ONLY DISPLAY THE BULLET POINTS AND NOT THE SUMMARY.
-DO NOT CREATE ANY SUB SECTIONS. JUST KEEP IT AS A LIST. NO HEADINGS.
-
-PRIVACY POLICY STATEMENT TEXT:
-{input}
-`;
+import PrivacySummarizer from "../../ai/privacy_summarizer/summarize";
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<string>("");
   const notyf = new Notyf();
-  const cag = new CAG(
-    {
-      chunkSize: 3000,
-      chunkOverlap: 100,
-    },
-    PROMPT_TEMPLATE
-  );
+  const privacySummarizer = new PrivacySummarizer();
 
   const findSignUpStatement = async (
     statements: PrivacyInfo[]
@@ -117,7 +100,8 @@ const PrivacyInsight = () => {
     if (!contents) {
       return;
     }
-    const processed_contents = await cag.generate_sequential(contents);
+    const processed_contents =
+      await privacySummarizer.summarizePrivacyPolicy(contents);
     console.log({ processed_contents });
     setSummary(contents);
     generateSummary(contents);
