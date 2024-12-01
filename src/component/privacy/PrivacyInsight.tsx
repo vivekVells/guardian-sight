@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import {
-  getStatementAndUrlsContainingKeyword,
-  normalizePrivacyStatements,
-  PrivacyInfo,
-} from "../../utils/privacy-utils";
 import { SCRAPE_URL_CADDY } from "../../utils/constants";
 import { run_privacy_checker } from "../../ai/privacy_checker";
 import PrivacySummarizer from "../../ai/privacy_summarizer/summarize";
-import Insights from "./Insights";
+import Insights, { PrivacyPolicyStageKeys } from "./Insights";
+import {
+  PrivacyInfo,
+  normalizePrivacyStatements,
+  getStatementAndUrlsContainingKeyword,
+} from "../../utils/privacy-utils";
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<string>("");
+  const [currentState, setCurrentState] =
+    useState<PrivacyPolicyStageKeys>("DETECTING_SIGNUP");
   const [displayInsight, setDisplayInsight] = useState<boolean>(false);
   const privacySummarizer = new PrivacySummarizer();
 
@@ -41,6 +43,9 @@ const PrivacyInsight = () => {
         return null;
       }
 
+      setDisplayInsight(true);
+      setCurrentState("DETECTING_SIGNUP");
+
       return statements.find(
         ({ id }) => id === mappedStatementId
       ) as PrivacyInfo;
@@ -56,6 +61,7 @@ const PrivacyInsight = () => {
   const findSignUpStatementUrl = async () => {
     const statements = getStatementAndUrlsContainingKeyword("privacy");
     const signUpStatement = await findSignUpStatement(statements);
+    setCurrentState("LOOKING_FOR_POLICY");
 
     console.log({ statements, signUpStatement });
 
@@ -70,6 +76,7 @@ const PrivacyInsight = () => {
     if (!signUpStatementUrl) {
       return null;
     }
+    setCurrentState("POLICY_FOUND");
 
     try {
       const scrapeUrl = `${SCRAPE_URL_CADDY}${signUpStatementUrl}`;
@@ -90,6 +97,7 @@ const PrivacyInsight = () => {
   };
 
   const generateSummary = async (contents: string) => {
+    setCurrentState("SUMMARIZING_POINTS");
     const processed_contents =
       await privacySummarizer.summarizePrivacyPolicy(contents);
     console.info("Generating summaries for text content: \n", contents);
@@ -103,9 +111,10 @@ const PrivacyInsight = () => {
     if (!contents) {
       return;
     }
-    setDisplayInsight(true);
+    setCurrentState("RETRIEVED_PRIVACY_CONTENTS");
     const generatedSummary = await generateSummary(contents);
     setSummary(generatedSummary);
+    setCurrentState("SUMMARY_READY");
   };
 
   useEffect(() => {
@@ -117,7 +126,11 @@ const PrivacyInsight = () => {
       <h1>Guardian Insights</h1>
       <h2>Summaries</h2>
       <p>REPLACE: {summary}</p>
-      <Insights summaryMock={summary} shouldShow={displayInsight} />
+      <Insights
+        summaryMock={summary}
+        shouldShow={displayInsight}
+        currentState={currentState}
+      />
     </div>
   );
 };

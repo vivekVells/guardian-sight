@@ -1,4 +1,7 @@
-// import { SCRAPE_URL_CADDY } from "./constants";
+import remarkGfm from "remark-gfm";
+import { PRIVACY_IMPORTANCE_STATEMENTS } from "./constants";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 
 export interface PrivacyInfo {
   id: number;
@@ -113,4 +116,23 @@ export const getSentencesContainingKeyword = (keyword: string): string[] => {
 
   // Convert Set to Array and return
   return Array.from(matchingSentences);
+};
+
+// Function to return a random privacy importance point
+export const getRandomPrivacyImportancePoint = () => {
+  const randomIndex = Math.floor(
+    Math.random() * PRIVACY_IMPORTANCE_STATEMENTS.length
+  );
+  return PRIVACY_IMPORTANCE_STATEMENTS[randomIndex].point;
+};
+
+export const renderMarkdown = (contents: any) => {
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]} // Allow HTML tags to be rendered
+    >
+      {contents}
+    </ReactMarkdown>
+  );
 };
