@@ -90,9 +90,12 @@ const PrivacyInsight = () => {
     }
   };
 
-  const generateSummary = (contents: string) => {
+  const generateSummary = async (contents: string) => {
+    const processed_contents =
+      await privacySummarizer.summarizePrivacyPolicy(contents);
     console.info("Generating summaries for text content: \n", contents);
-    // setSummary("MOCKED SUMMARY");
+    console.log({ processed_contents });
+    return processed_contents;
   };
 
   const getSummary = async () => {
@@ -100,11 +103,8 @@ const PrivacyInsight = () => {
     if (!contents) {
       return;
     }
-    const processed_contents =
-      await privacySummarizer.summarizePrivacyPolicy(contents);
-    console.log({ processed_contents });
-    setSummary(contents);
-    generateSummary(contents);
+    const generatedSummary = await generateSummary(contents);
+    setSummary(generatedSummary);
   };
 
   useEffect(() => {

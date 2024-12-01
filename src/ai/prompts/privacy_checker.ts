@@ -12,6 +12,8 @@ Instructions:
 3. Select the line that most closely matches this context.
 4. If no line matches the criteria, respond with "0".
 5. Respond only with the number of the line that matches the criteria (e.g., "1," "2," "3"). If no lines match, respond with "0."
+6. Your response should be a single number indicating the line number that mentions a privacy policy in the context of sign-up or agreeing to terms.
+7. If you are unsure, use your best judgment based on the provided instructions and break ties by selecting the line that most clearly mentions a privacy policy in the context of sign-up or agreeing to terms.
 
 Example 1:
 Input:

@@ -1,4 +1,3 @@
-import { prepare_prompt } from "..";
 import CAG from "../cag/interface";
 import { BULLET_GENERATOR_PROMPT_TEMPLATE } from "./prompt";
 
@@ -18,8 +17,7 @@ class BulletGenerator {
   }
 
   public async generateBulletPoints(text: string): Promise<string> {
-    const prompt = prepare_prompt(BULLET_GENERATOR_PROMPT_TEMPLATE, text);
-    const response = this.cag.generate_sequential(prompt);
+    const response = this.cag.generate_sequential(text);
     return response;
   }
 }
