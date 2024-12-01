@@ -10,7 +10,7 @@ export interface PrivacyPolicyStage {
 // Define the array type based on the interface
 export type PrivacyPolicyStagesArray = PrivacyPolicyStage[];
 
-export const PRIVACY_IMPORTANCE_STATEMENTS = [
+export const MOCKED_PRIVACY_IMPORTANCE_STATEMENTS = [
   {
     point:
       "🔒 **Consumer Trust**: 79% of consumers are concerned about how companies use their personal data. [Source: Pew Research Center](https://www.pewresearch.org/fact-tank/2019/09/05/the-privacy-paradox/)",

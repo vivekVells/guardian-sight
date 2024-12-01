@@ -1,5 +1,5 @@
 import remarkGfm from "remark-gfm";
-import { PRIVACY_IMPORTANCE_STATEMENTS } from "./constants";
+import { MOCKED_PRIVACY_IMPORTANCE_STATEMENTS } from "./constants";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 
@@ -121,9 +121,9 @@ export const getSentencesContainingKeyword = (keyword: string): string[] => {
 // Function to return a random privacy importance point
 export const getRandomPrivacyImportancePoint = () => {
   const randomIndex = Math.floor(
-    Math.random() * PRIVACY_IMPORTANCE_STATEMENTS.length
+    Math.random() * MOCKED_PRIVACY_IMPORTANCE_STATEMENTS.length
   );
-  return PRIVACY_IMPORTANCE_STATEMENTS[randomIndex].point;
+  return MOCKED_PRIVACY_IMPORTANCE_STATEMENTS[randomIndex].point;
 };
 
 export const renderMarkdown = (contents: any) => {
