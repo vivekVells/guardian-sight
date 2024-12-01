@@ -127,7 +127,7 @@ const PrivacyInsight = () => {
       <h2>Summaries</h2>
       <p>REPLACE: {summary}</p>
       <Insights
-        summaryMock={summary}
+        summaryContents={summary}
         shouldShow={displayInsight}
         currentState={currentState}
       />
