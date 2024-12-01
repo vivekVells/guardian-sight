@@ -9,10 +9,10 @@ class BulletConsolidator {
   constructor() {
     this.cag = new CAG(
       {
-        chunkSize: 10000,
-        chunkOverlap: 3000,
-        iteration_limit: 10,
-        iteration_output_token_limit: 4000,
+        chunkSize: 3000,
+        chunkOverlap: 500,
+        iteration_limit: 20,
+        iteration_output_token_limit: 5000,
       },
       BULLET_CONSOLIDATOR_PROMPT_TEMPLATE
     );
