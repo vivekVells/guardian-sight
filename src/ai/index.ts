@@ -1,11 +1,16 @@
 // AI Interface
 
-export type AIRoleType = "privacy_checker";
+export type AIRoleType =
+  | "privacy_checker"
+  | "summarizer_presenter"
+  | "privacy_summarizer";
 
 export const INPUT_PLACEHOLDER = "{input}";
 
 const sessionMap: Record<AIRoleType, unknown> = {
   privacy_checker: undefined,
+  summarizer_presenter: undefined,
+  privacy_summarizer: undefined,
 };
 
 const defaultModelArgs = {
