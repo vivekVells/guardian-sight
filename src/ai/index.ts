@@ -3,7 +3,8 @@
 export type AIRoleType =
   | "privacy_checker"
   | "summarizer_presenter"
-  | "privacy_summarizer";
+  | "privacy_summarizer"
+  | "impact_statement_generator";
 
 export const INPUT_PLACEHOLDER = "{input}";
 
@@ -11,6 +12,7 @@ const sessionMap: Record<AIRoleType, unknown> = {
   privacy_checker: undefined,
   summarizer_presenter: undefined,
   privacy_summarizer: undefined,
+  impact_statement_generator: undefined,
 };
 
 const defaultModelArgs = {

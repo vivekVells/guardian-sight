@@ -1,4 +1,4 @@
-import { createAISession, prepare_prompt } from "../..";
+import { createAISession, prepare_prompt } from "..";
 import { SUMMARIZER_PRESENTER_PROMPT_TEMPLATE } from "./prompt";
 
 export const ROLE = "summarizer_presenter";
