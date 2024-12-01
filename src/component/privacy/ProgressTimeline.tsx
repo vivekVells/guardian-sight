@@ -14,15 +14,6 @@ export const PRIVACY_IMPORTANCE_STATEMENTS = [
   "🌐 **Digital Footprint**: 92% of consumers believe they have lost control over how their personal information is collected and used by companies. [Source: Pew Research Center](https://www.pewresearch.org/internet/2020/01/23/the-privacy-and-security-concerns-of-americans-in-the-digital-age/)",
 ];
 
-// // Function to render Markdown content
-// export const renderMarkdown = (contents: any) => {
-//   return (
-//     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-//       {contents}
-//     </ReactMarkdown>
-//   );
-// };
-
 const ProgressTimeline: React.FC = () => (
   <div>
     <Carousel autoplay effect="fade" dotPosition="bottom">
