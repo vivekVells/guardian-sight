@@ -22,30 +22,25 @@ const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
             <Card
               hoverable
               style={{
-                // width: "100%",
                 margin: "0 auto",
-                height: "100%",
                 display: "flex",
-                alignItems: "left",
-                justifyContent: "left",
+                flexDirection: "row",
+                alignItems: "flex-start",
                 wordWrap: "break-word",
               }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://images.pexels.com/photos/113726/pexels-photo-113726.jpeg"
-                  style={{
-                    height: "200px",
-                    width: "300px",
-                    // objectFit: "cover",
-                  }}
-                />
-              }
             >
-              <Meta
-                // title="Privacy Importance"
-                description={renderMarkdown(statement)}
+              <img
+                alt="example"
+                src="https://images.pexels.com/photos/113726/pexels-photo-113726.jpeg"
+                style={{
+                  width: "100%",
+                  height: "200px",
+                  objectFit: "cover",
+                }}
               />
+              <div style={{ padding: "16px", flex: 1 }}>
+                <Meta description={renderMarkdown(statement)} />
+              </div>
             </Card>
           </div>
         ))}
