@@ -39,7 +39,7 @@ const PRIVACY_POLICY_STAGE_MAPPED_MSG = {
 export type PrivacyPolicyStageKeys =
   keyof typeof PRIVACY_POLICY_STAGE_MAPPED_MSG;
 
-type SummaryContentsType = {
+export type SummaryContentsType = {
   key: string;
   title: string;
   content: string;
@@ -65,14 +65,9 @@ const Insights: React.FC<InsightsProps> = ({
     useState<SummaryContentsType[]>(summaryContents);
   const [privacyImportanceStatements, setPrivacyImportanceStatements] =
     useState<Array<string>>([]);
-  const { Paragraph, Link, Text, Title } = Typography;
+  const { Paragraph, Link, Title } = Typography;
 
   console.log({ summaryContents });
-
-  const onOpen = () => {
-    setOpen(true);
-    setSummary([] as SummaryContentsType[]);
-  };
 
   const onClose = () => {
     setOpen(false);
@@ -125,16 +120,48 @@ const Insights: React.FC<InsightsProps> = ({
       fontSize: "48px",
     };
     const panelItems = [
-      { key: "privacy", icon: <LockOutlined />, title: "Privacy" },
-      { key: "audio", icon: <AudioOutlined />, title: "Audio" },
-      { key: "video", icon: <VideoCameraOutlined />, title: "Video" },
+      {
+        key: "privacy",
+        icon: <LockOutlined />,
+        title: "Privacy",
+        description:
+          "Manage your personal data protection settings and control how your information is collected and used.",
+      },
+      {
+        key: "audio",
+        icon: <AudioOutlined />,
+        title: "Audio",
+        description:
+          "Configure audio input, output, and permissions for microphone access across applications.",
+      },
+      {
+        key: "video",
+        icon: <VideoCameraOutlined />,
+        title: "Video",
+        description:
+          "Adjust camera settings, permissions, and video-related preferences for your device.",
+      },
       {
         key: "advertisement",
         icon: <DollarOutlined />,
         title: "Advertisement",
+        description:
+          "Manage ad preferences, personalization settings, and data used for targeted advertising.",
       },
-      { key: "cookie", icon: <LockOutlined />, title: "Cookie" },
-      { key: "location", icon: <EnvironmentOutlined />, title: "Location" },
+      {
+        key: "cookie",
+        icon: <LockOutlined />,
+        title: "Cookie",
+        description:
+          "Control cookie settings, manage website tracking, and adjust data retention preferences.",
+      },
+      {
+        key: "location",
+        icon: <EnvironmentOutlined />,
+        title: "Location",
+        description:
+          "Manage location services, GPS permissions, and location-based app access.",
+      },
     ];
 
     const scoreColorMap: any = summary.reduce((acc, { key, score_color }) => {
@@ -146,19 +173,56 @@ const Insights: React.FC<InsightsProps> = ({
     return (
       <div>
         <Row gutter={[0, 0]} style={{ margin: 0, padding: 0 }}>
-          {panelItems.map(({ key, icon, title }) => {
-            const backgroundColor = scoreColorMap[key] || "#f0f0f0"; // Default to light grey if key not found
+          {panelItems.map(({ key, icon, title, description }) => {
+            const backgroundColor = (() => {
+              switch (scoreColorMap[key]) {
+                case "green":
+                  return "#81C784";
+                case "yellow":
+                  return "#FFD54F";
+                case "red":
+                  return "#D32F2F";
+                case "grey":
+                  return "#9E9E9E";
+                default:
+                  return "#A0A0A0";
+              }
+            })();
 
             return (
               <Col key={key} span={8} style={{ padding: "0.5em" }}>
                 <Popover
                   content={
                     <div>
-                      <p>SCORE CARD: 100</p>
-                      <p>{summary.find((item) => item.key === key)?.content}</p>
+                      <ul>
+                        <li>
+                          <Paragraph>{description}</Paragraph>
+                        </li>
+                        <li>
+                          <Paragraph strong>Privacy Inference</Paragraph>
+                          <Paragraph>
+                            {(() => {
+                              switch (scoreColorMap[key]) {
+                                case "green":
+                                  return "🟢 Minimal privacy concerns. Data well-protected.";
+                                case "yellow":
+                                  return "🟡 Moderate privacy risks. Exercise caution.";
+                                case "red":
+                                  return "🔴 Significant privacy concerns. High data risk.";
+                                default:
+                                  return "⚪ No relevant data found for this category.";
+                              }
+                            })()}
+                          </Paragraph>
+                        </li>
+                      </ul>
                     </div>
                   }
-                  title={title}
+                  title={
+                    <Title level={3} style={{ margin: 0, fontSize: "1.75em" }}>
+                      {title}
+                    </Title>
+                  }
                 >
                   <div
                     style={{
@@ -175,9 +239,9 @@ const Insights: React.FC<InsightsProps> = ({
                   >
                     <div style={{ textAlign: "center" }}>
                       {React.cloneElement(icon, { style: iconStyle })}
-                      <Typography.Title level={4} style={{ marginLeft: "8px" }}>
+                      <Title level={4} style={{ marginLeft: "8px" }}>
                         {title}
-                      </Typography.Title>
+                      </Title>
                     </div>
                   </div>
                 </Popover>
@@ -214,9 +278,6 @@ const Insights: React.FC<InsightsProps> = ({
 
   return (
     <>
-      <Button type="primary" onClick={onOpen}>
-        Analyze Privacy Policy
-      </Button>
       <Drawer
         title="Guardian Sight 🚀"
         styles={{ header: { textAlign: "center" } }}
@@ -254,11 +315,12 @@ const Insights: React.FC<InsightsProps> = ({
             <br />
             <br />
 
-            <Image.PreviewGroup
+            <Image src={privacyImg} />
+            {/* <Image.PreviewGroup
               items={["src/assets/icons/privacy_simplified.png"]}
+              fallback="src/assets/icons/privacy_simplified.png"
             >
-              <Image src={privacyImg} />
-            </Image.PreviewGroup>
+            </Image.PreviewGroup> */}
           </>
         ) : (
           <>

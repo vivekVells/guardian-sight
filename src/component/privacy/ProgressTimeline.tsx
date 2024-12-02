@@ -43,7 +43,7 @@ const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
               }
             >
               <Meta
-                title="Privacy Importance"
+                // title="Privacy Importance"
                 description={renderMarkdown(statement)}
               />
             </Card>
