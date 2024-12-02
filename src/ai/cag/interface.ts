@@ -62,12 +62,12 @@ class CAG {
   };
 
   generate_sequential = async (longInput: string): Promise<string> => {
-    this._ai = await this.initialize();
     const chunks = await this.splitter.splitText(longInput);
     console.log("Chunks: ", chunks);
     console.log("Number of chunks: ", chunks.length);
     let output: string[] = [];
     for (const chunk of chunks) {
+      this._ai = await this.initialize();
       console.log("Running chunk number: ", chunk);
       const prompt = prepare_prompt(this.prompt_template, chunk);
       const response = await this._ai.prompt(prompt);

@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { Notyf } from "notyf";
-import "notyf/notyf.min.css";
-import {
-  getStatementAndUrlsContainingKeyword,
-  normalizePrivacyStatements,
-  PrivacyInfo,
-} from "../../utils/privacy-utils";
 import { SCRAPE_URL_CADDY } from "../../utils/constants";
 import { run_privacy_checker } from "../../ai/privacy_checker";
 import PrivacySummarizer from "../../ai/privacy_summarizer/summarize";
+import Insights, { PrivacyPolicyStageKeys } from "./Insights";
+import {
+  PrivacyInfo,
+  normalizePrivacyStatements,
+  getStatementAndUrlsContainingKeyword,
+} from "../../utils/privacy-utils";
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<string>("");
-  const notyf = new Notyf();
+  const [currentState, setCurrentState] =
+    useState<PrivacyPolicyStageKeys>("DETECTING_SIGNUP");
+  const [displayInsight, setDisplayInsight] = useState<boolean>(false);
   const privacySummarizer = new PrivacySummarizer();
 
   const findSignUpStatement = async (
@@ -42,6 +43,9 @@ const PrivacyInsight = () => {
         return null;
       }
 
+      setDisplayInsight(true);
+      setCurrentState("DETECTING_SIGNUP");
+
       return statements.find(
         ({ id }) => id === mappedStatementId
       ) as PrivacyInfo;
@@ -57,6 +61,7 @@ const PrivacyInsight = () => {
   const findSignUpStatementUrl = async () => {
     const statements = getStatementAndUrlsContainingKeyword("privacy");
     const signUpStatement = await findSignUpStatement(statements);
+    setCurrentState("LOOKING_FOR_POLICY");
 
     console.log({ statements, signUpStatement });
 
@@ -71,6 +76,7 @@ const PrivacyInsight = () => {
     if (!signUpStatementUrl) {
       return null;
     }
+    setCurrentState("POLICY_FOUND");
 
     try {
       const scrapeUrl = `${SCRAPE_URL_CADDY}${signUpStatementUrl}`;
@@ -91,6 +97,7 @@ const PrivacyInsight = () => {
   };
 
   const generateSummary = async (contents: string) => {
+    setCurrentState("SUMMARIZING_POINTS");
     const processed_contents =
       await privacySummarizer.summarizePrivacyPolicy(contents);
     console.info("Generating summaries for text content: \n", contents);
@@ -98,33 +105,32 @@ const PrivacyInsight = () => {
     return processed_contents;
   };
 
+  // @ts-ignore
   const getSummary = async () => {
     const contents = await getStatementContents();
     if (!contents) {
       return;
     }
+    setCurrentState("RETRIEVED_PRIVACY_CONTENTS");
     const generatedSummary = await generateSummary(contents);
     setSummary(generatedSummary);
+    setCurrentState("SUMMARY_READY");
   };
 
   useEffect(() => {
     getSummary();
   }, []);
 
-  useEffect(() => {
-    summary &&
-      notyf.success({
-        message: summary.slice(0, 250),
-        duration: 100000, // Set duration to null to keep the notification visible indefinitely
-        dismissible: true, // Make the notification dismissable);
-      });
-  }, [summary]);
-
   return (
     <div>
       <h1>Guardian Insights</h1>
       <h2>Summaries</h2>
       <p>REPLACE: {summary}</p>
+      <Insights
+        summaryContents={summary}
+        shouldShow={displayInsight}
+        currentState={currentState}
+      />
     </div>
   );
 };
