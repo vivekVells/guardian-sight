@@ -32,6 +32,8 @@ Follow these instructions:
 6. Ensure that each entry in the JSON is well-structured, concise, and uses plain text strings for the **"content"** field.
     
 7. Return only the JSON output; do not include additional headings, comments, or explanations.
+   
+8. <bullet_point_content> should be a minimum of at least 2-3 sentences. If there are more than one bullet points related to category then summarize all of them into one paragraph. 
     
 
 **EXAMPLE JSON FORMAT:**
