@@ -102,6 +102,13 @@ const PrivacyInsight = () => {
       await privacySummarizer.summarizePrivacyPolicy(contents);
     console.info("Generating summaries for text content: \n", contents);
     console.log({ processed_contents });
+    try {
+      const parsedContents = JSON.parse(processed_contents);
+      console.log("Parsed contents: ", parsedContents);
+      return JSON.stringify(parsedContents, null, 2);
+    } catch (error) {
+      console.error("Error parsing processed contents: ", error);
+    }
     return processed_contents;
   };
 
