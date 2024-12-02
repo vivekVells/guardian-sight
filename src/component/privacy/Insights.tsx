@@ -67,6 +67,11 @@ const Insights: React.FC<InsightsProps> = ({
     useState<Array<string>>([]);
   const { Paragraph, Link, Title } = Typography;
 
+  // Resolve the image URL using chrome.runtime.getURL for Chrome extensions, with a fallback to privacyImg
+  const privacyImgUrl =
+    chrome?.runtime?.getURL(`assets/${privacyImg.split("/").pop()}`) ??
+    privacyImg;
+
   console.log({ summaryContents });
 
   const onClose = () => {
@@ -310,17 +315,19 @@ const Insights: React.FC<InsightsProps> = ({
             {privacyImportanceStatements.length > 0 ? (
               <ProgressTimeline statements={privacyImportanceStatements} />
             ) : (
-              <Skeleton active />
+              <Skeleton active paragraph={{ rows: 8 }} />
             )}
             <br />
             <br />
 
-            <Image src={privacyImg} />
-            {/* <Image.PreviewGroup
-              items={["src/assets/icons/privacy_simplified.png"]}
-              fallback="src/assets/icons/privacy_simplified.png"
-            >
-            </Image.PreviewGroup> */}
+            <div>
+              <Image
+                src={privacyImgUrl}
+                alt="User Journey Image of Guardian Sight"
+                width={"100%"}
+                preview={true}
+              />
+            </div>
           </>
         ) : (
           <>
