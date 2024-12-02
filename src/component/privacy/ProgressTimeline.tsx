@@ -16,13 +16,13 @@ const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
 
   return (
     <div>
-      <Carousel autoplay effect="fade" dotPosition="bottom">
+      <Carousel autoplay effect="fade" dots={false} autoplaySpeed={3000} fade>
         {statements.map((statement, index) => (
           <div key={index}>
             <Card
               hoverable
               style={{
-                width: "100%",
+                // width: "100%",
                 margin: "0 auto",
                 height: "100%",
                 display: "flex",
@@ -34,7 +34,11 @@ const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
                 <img
                   alt="example"
                   src="https://images.pexels.com/photos/113726/pexels-photo-113726.jpeg"
-                  style={{ height: "200px", objectFit: "cover" }}
+                  style={{
+                    height: "200px",
+                    width: "300px",
+                    // objectFit: "cover",
+                  }}
                 />
               }
             >

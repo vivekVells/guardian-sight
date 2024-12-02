@@ -8,9 +8,11 @@ import {
   normalizePrivacyStatements,
   getStatementAndUrlsContainingKeyword,
 } from "../../utils/privacy-utils";
+import { mockedSummaryContents } from "./mocked/sample";
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<string>("");
+  const [privacyUrl, setPrivacyUrl] = useState<string>("");
   const [currentState, setCurrentState] =
     useState<PrivacyPolicyStageKeys>("DETECTING_SIGNUP");
   const [displayInsight, setDisplayInsight] = useState<boolean>(false);
@@ -77,6 +79,7 @@ const PrivacyInsight = () => {
       return null;
     }
     setCurrentState("POLICY_FOUND");
+    setPrivacyUrl(signUpStatementUrl);
 
     try {
       const scrapeUrl = `${SCRAPE_URL_CADDY}${signUpStatementUrl}`;
@@ -127,7 +130,9 @@ const PrivacyInsight = () => {
       <h2>Summaries</h2>
       <p>REPLACE: {summary}</p>
       <Insights
-        summaryContents={summary}
+        // summaryContents={summary}
+        summaryContents={mockedSummaryContents}
+        privacyUrl={privacyUrl}
         shouldShow={displayInsight}
         currentState={currentState}
       />

@@ -42,7 +42,7 @@ export const getStatementAndUrlsContainingKeyword = (
         while (tempElement && tempElement.tagName.toLowerCase() !== "div") {
           tempElement = tempElement.parentElement;
         }
-        parentElement = tempElement as HTMLDivElement; // Type assertion
+        parentElement = tempElement as HTMLDivElement;
       }
       if (parentElement) {
         // Use innerHTML to maintain formatting and replace line breaks with spaces
@@ -50,7 +50,7 @@ export const getStatementAndUrlsContainingKeyword = (
           .replace(/<br\s*\/?>/g, " ") // Replace line breaks with spaces
           .replace(/<\/?[^>]+(>|$)/g, " ") // Remove HTML tags while preserving spaces
           .replace(/\s+/g, " ") // Replace multiple spaces with a single space
-          .trim(); // Trim leading and trailing spaces
+          .trim();
 
         // Check if the statement is unique
         if (!seenStatements.has(statement)) {
