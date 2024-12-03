@@ -25,6 +25,7 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import privacyImg from "../../assets/icons/privacy_simplified.png";
+import FinalSummaryHeader from "./FinalSummaryHeader";
 
 const PRIVACY_POLICY_STAGE_MAPPED_MSG = {
   DETECTING_SIGNUP: "Detecting sign-up flow...",
@@ -50,6 +51,7 @@ interface InsightsProps {
   shouldShow?: boolean;
   privacyUrl: string;
   summaryContents: SummaryContentsType[];
+  insightsContents: string;
   currentState: PrivacyPolicyStageKeys;
 }
 
@@ -57,6 +59,7 @@ const Insights: React.FC<InsightsProps> = ({
   shouldShow = false,
   privacyUrl = "",
   summaryContents,
+  insightsContents,
   currentState,
 }) => {
   const [open, setOpen] = useState(shouldShow);
@@ -312,6 +315,22 @@ const Insights: React.FC<InsightsProps> = ({
         }
         destroyOnClose={true}
         keyboard={false}
+        footer={
+          <Typography.Text>
+            Insights powered by Chrome's{" "}
+            <Typography.Link
+              href="https://developer.chrome.com/docs/ai/built-in"
+              target="_blank"
+            >
+              built-in AI.
+            </Typography.Link>{" "}
+            Please verify your{" "}
+            <Typography.Link href={privacyUrl} target="_blank">
+              privacy policy
+            </Typography.Link>
+            , as AI may not always be accurate.
+          </Typography.Text>
+        }
       >
         {loading ? (
           <>
@@ -341,6 +360,16 @@ const Insights: React.FC<InsightsProps> = ({
           <>
             {privacyUrl && constructPrivacyUrl()}
             <br />
+            {summaryContents.length > 0 ? (
+              <FinalSummaryHeader contents={insightsContents} />
+            ) : (
+              <Skeleton active paragraph={{ rows: 5 }} />
+            )}
+            <br />
+            <Typography.Title level={5}>
+              Here's What You Signed Up For
+            </Typography.Title>
+
             {scorePanel()}
             <br />
             {constructSummary()}

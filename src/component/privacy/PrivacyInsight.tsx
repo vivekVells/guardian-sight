@@ -14,6 +14,7 @@ import {
 
 const PrivacyInsight = () => {
   const [summary, setSummary] = useState<SummaryContentsType[]>([]);
+  const [insightsContents, setInsightsContents] = useState<string>("");
   const [privacyUrl, setPrivacyUrl] = useState<string>("");
   const [currentState, setCurrentState] =
     useState<PrivacyPolicyStageKeys>("DETECTING_SIGNUP");
@@ -111,6 +112,11 @@ const PrivacyInsight = () => {
         processed_contents
       ) as SummaryContentsType[];
       console.log("Parsed contents: ", parsedContents);
+      const onlyContents = parsedContents
+        .map(({ content }) => content)
+        .join("");
+      setInsightsContents(onlyContents);
+
       return parsedContents;
     } catch (error) {
       console.error("Error parsing processed contents: ", error);
@@ -124,10 +130,12 @@ const PrivacyInsight = () => {
     if (!contents) {
       return;
     }
+
     setCurrentState("RETRIEVED_PRIVACY_CONTENTS");
     const generatedSummary = (await generateSummary(
       contents
     )) as unknown as SummaryContentsType[];
+
     setSummary(generatedSummary);
     setCurrentState("SUMMARY_READY");
   };
@@ -139,6 +147,7 @@ const PrivacyInsight = () => {
   return (
     <div>
       <Insights
+        insightsContents={insightsContents}
         summaryContents={summary}
         privacyUrl={privacyUrl}
         shouldShow={displayInsight}
