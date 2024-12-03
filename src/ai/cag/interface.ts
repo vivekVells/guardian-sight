@@ -56,9 +56,9 @@ class CAG {
     });
   };
 
-  initialize = async () => {
+  initialize = async (aiType="languageModel", config = {}) => {
     // @ts-ignore
-    return await window.ai.languageModel.create();
+    return await window.ai[aiType].create(config);
   };
 
   generate_sequential = async (longInput: string): Promise<string> => {

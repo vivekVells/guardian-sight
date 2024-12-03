@@ -12,11 +12,10 @@ Follow these instructions:
     - **Location** (content_key: location)
     - **Cookie** (content_key: cookie)
 2. Place each categorized bullet point into the appropriate section using the JSON structure below:
-    
-    
-    [
-    {"key": "<content_key>", "title": "<category_name>", "content": "<bullet_point_content>", "score_color": "<appropriate_color>"}
-    ]
+
+[
+{"key": "<content_key>", "title": "<category_name>", "content": "<bullet_point_content>", "score_color": "<appropriate_color>"}
+]
 
     
 3. Use these mappings for **score_color**:
@@ -37,8 +36,6 @@ Follow these instructions:
     
 
 **EXAMPLE JSON FORMAT:**
-
-
 [
   {"key": "audio", "title": "Audio", "content": "Messenger utilizes end-to-end encryption for secure messaging.", "score_color": "green"},
   {"key": "video", "title": "Video", "content": "Users are notified when a video recording is initiated.", "score_color": "yellow"},
