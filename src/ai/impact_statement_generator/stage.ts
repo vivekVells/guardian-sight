@@ -7,6 +7,7 @@ class ImpactStatementGenerator {
   public async generateImpactStatements(): Promise<Array<string>> {
     const _ai = await createAISession(ROLE, {}, false);
     const response = await _ai.prompt(IMPACT_STATEMENT_PROMPT);
+    await _ai.destroy();
 
     // Split the response into individual impact statements
     const impactStatements = response.split("#$$#");

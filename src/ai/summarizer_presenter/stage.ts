@@ -8,6 +8,7 @@ class SummarizerPresenter {
     const _ai = await createAISession(ROLE, {}, false);
     const prompt = prepare_prompt(SUMMARIZER_PRESENTER_PROMPT_TEMPLATE, text);
     const response = _ai.prompt(prompt);
+    await _ai.destroy();
     return response;
   }
 }
