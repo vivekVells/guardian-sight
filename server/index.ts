@@ -39,7 +39,7 @@ app.get('/scrape', cache('30 minutes'), async (req, res) => {
     });
     const page = await context.newPage();
 
-    await page.goto(url, { waitUntil: 'networkidle' });
+    await page.goto(url);
     await page.waitForLoadState();
 
     const textContent = await page.evaluate(() => {

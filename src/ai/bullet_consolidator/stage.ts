@@ -12,7 +12,7 @@ class BulletConsolidator {
         chunkSize: 3000,
         chunkOverlap: 500,
         iteration_limit: 20,
-        iteration_output_token_limit: 5000,
+        iteration_output_token_limit: 10000,
       },
       BULLET_CONSOLIDATOR_PROMPT_TEMPLATE
     );

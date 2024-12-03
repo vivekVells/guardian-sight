@@ -9,8 +9,8 @@ class BulletGenerator {
   constructor() {
     this.cag = new CAG(
       {
-        chunkSize: 20000,
-        chunkOverlap: 5000,
+        chunkSize: 4000,
+        chunkOverlap: 500,
       },
       BULLET_GENERATOR_PROMPT_TEMPLATE
     );

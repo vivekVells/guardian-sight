@@ -5,7 +5,7 @@ export const ROLE = "summarizer_presenter";
 
 class SummarizerPresenter {
   public async summarizeAndPresent(text: string): Promise<string> {
-    const _ai = await createAISession(ROLE, {}, false);
+    const _ai = await createAISession(ROLE, { temperature: 0, topK: 1}, false);
     const prompt = prepare_prompt(SUMMARIZER_PRESENTER_PROMPT_TEMPLATE, text);
     const response = _ai.prompt(prompt);
     await _ai.destroy();
