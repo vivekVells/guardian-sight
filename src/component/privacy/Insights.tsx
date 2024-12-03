@@ -281,10 +281,18 @@ const Insights: React.FC<InsightsProps> = ({
     </div>
   );
 
+  const TitleComponent = () => (
+    <div>
+      <Title level={2} style={{ margin: 0 }}>
+        Guardian Sight
+      </Title>
+    </div>
+  );
+
   return (
     <>
       <Drawer
-        title="Guardian Sight 🚀"
+        title={<TitleComponent />}
         styles={{ header: { textAlign: "center" } }}
         placement="right"
         size="large"
