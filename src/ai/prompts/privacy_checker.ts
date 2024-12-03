@@ -80,9 +80,18 @@ Response: **2**
 Input:  
 1. "Visit our Privacy Policy page for detailed information on data handling."  
 2. "Our Privacy Policy outlines how we collect and use data."  
-3. "Please read our updated Privacy Policy for the latest changes."  
-Response: **0**  
-*Reason*: None of these lines mention sign-up actions, user consent, or agreement to the Privacy Policy. All are general informational statements.  
+3. "Please read our updated Privacy Policy for the latest changes."
+4. "Privacy"
+5. "Privacy Statement"
+6. "Privacy Policy"
+7. "Sign Up"
+8. "Sign Up Privacy"
+9. "Privacy Terms"
+10. "Sign Up Log In Messenger Facebook Lite Video Places Games Marketplace Meta Pay Meta Store Meta Quest Ray-Ban Meta Meta AI Instagram Threads Fundraisers Services Voting Information Center Privacy Policy Consumer Health Privacy Privacy Center Groups About Create ad Create Page Developers Careers Cookies Ad choices Terms Help Contact Uploading &amp; Non-Users Settings Activity log"
+11. Help Send feedback Privacy Terms
+12. Help &nbsp;•&nbsp; Privacy &nbsp;•&nbsp; Terms
+Response: **0**
+*Reason*: None of these lines mention sign-up actions, user consent, or agreement to the Privacy Policy. All are general informational statements. Example 11. is a false positive due to the presence of "Privacy Terms" without context and not a complete sentence.
 
 ---
 
