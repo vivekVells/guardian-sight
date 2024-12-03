@@ -5,12 +5,12 @@ Follow these instructions:
 
 1. Categorize the bullet points into the following sections ONLY. Do not add any new sections:
     
+    - **Privacy** (content_key: privacy)
     - **Audio** (content_key: audio)
     - **Video** (content_key: video)
-    - **Privacy** (content_key: privacy)
     - **Advertisement** (content_key: advertisement)
-    - **Location** (content_key: location)
     - **Cookie** (content_key: cookie)
+    - **Location** (content_key: location)
 2. Generate a JSON object for each bullet point with the following schema:   
 {
     "key": string,
@@ -39,18 +39,24 @@ Follow these instructions:
 
 8. Do not repeat any category in JSON. If there are multiple points for the category then use the same JSON object to append the multiple lines as a paragraph in the "content" section. Example: {"key": "audio", "title": "Audio", "content": "Messenger utilizes end-to-end encryption for secure messaging. Messenger utilizes end-to-end encryption for secure messaging. Messenger utilizes end-to-end encryption for secure messaging.", "score_color": "green"}.
 
-9. **Return the JSON output as plain text and not Markdown. DO NOT USE MARKDOWN TO OUTPUT JSON ONLY DO IT AS PLAIN TEXT**
+9. Do not add any new sections or categories. Only use the sections mentioned in the instructions.
+
+10. Follow the order of the sections as mentioned in the instructions. It should be in the order of Privacy, Audio, Video, Advertisement, Cookie, and Location.
+
+11. DO NOT CHANGE THE SECTION TITLE. The section title should be the same as mentioned in the instructions.
+
+12. **Return the JSON output as plain text and not Markdown. DO NOT USE MARKDOWN TO OUTPUT JSON ONLY DO IT AS PLAIN TEXT**
     
 
 **EXAMPLE JSON OUTPUT:**
 
 [
-  {"key": "audio", "title": "Audio", "content": "Messenger utilizes end-to-end encryption for secure messaging.", "score_color": "green"},
-  {"key": "video", "title": "Video", "content": "Users are notified when a video recording is initiated.", "score_color": "yellow"},
-  {"key": "privacy", "title": "Privacy", "content": "All data is anonymized and stored securely.", "score_color": "green"},
-  {"key": "advertisement", "title": "Advertisement", "content": "Ads are personalized based on browsing history.", "score_color": "yellow"},
-  {"key": "location", "title": "Location", "content": "The app tracks user locations to provide local services.", "score_color": "red"},
-  {"key": "cookie", "title": "Cookie", "content": "Cookies are used to store session data.", "score_color": "red"}
+{"key": "privacy", "title": "Privacy", "content": "All data is anonymized and stored securely.", "score_color": "green"},  
+{"key": "audio", "title": "Audio", "content": "Messenger utilizes end-to-end encryption for secure messaging.", "score_color": "green"},
+{"key": "video", "title": "Video", "content": "Users are notified when a video recording is initiated.", "score_color": "yellow"},
+{"key": "advertisement", "title": "Advertisement", "content": "Ads are personalized based on browsing history.", "score_color": "yellow"},
+{"key": "cookie", "title": "Cookie", "content": "Cookies are used to store session data.", "score_color": "red"},
+{"key": "location", "title": "Location", "content": "The app tracks user locations to provide local services.", "score_color": "red"}
 ]
 
 
