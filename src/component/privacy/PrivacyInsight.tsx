@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { SCRAPE_URL_CADDY } from "../../utils/constants";
 import { run_privacy_checker } from "../../ai/privacy_checker";
 import PrivacySummarizer from "../../ai/privacy_summarizer/summarize";
-import Insights, { PrivacyPolicyStageKeys } from "./Insights";
+import Insights, {
+  PrivacyPolicyStageKeys,
+  SummaryContentsType,
+} from "./Insights";
 import {
   PrivacyInfo,
   normalizePrivacyStatements,
@@ -10,7 +13,8 @@ import {
 } from "../../utils/privacy-utils";
 
 const PrivacyInsight = () => {
-  const [summary, setSummary] = useState<string>("");
+  const [summary, setSummary] = useState<SummaryContentsType[]>([]);
+  const [privacyUrl, setPrivacyUrl] = useState<string>("");
   const [currentState, setCurrentState] =
     useState<PrivacyPolicyStageKeys>("DETECTING_SIGNUP");
   const [displayInsight, setDisplayInsight] = useState<boolean>(false);
@@ -77,6 +81,7 @@ const PrivacyInsight = () => {
       return null;
     }
     setCurrentState("POLICY_FOUND");
+    setPrivacyUrl(signUpStatementUrl);
 
     try {
       const scrapeUrl = `${SCRAPE_URL_CADDY}${signUpStatementUrl}`;
@@ -86,7 +91,6 @@ const PrivacyInsight = () => {
       const data = await response.json();
       console.log(`Data for ${signUpStatementUrl}:`, data);
 
-      // Update state with extracted text if available
       if (data?.extractedText) {
         return data?.extractedText;
       }
@@ -103,13 +107,15 @@ const PrivacyInsight = () => {
     console.info("Generating summaries for text content: \n", contents);
     console.log({ processed_contents });
     try {
-      const parsedContents = JSON.parse(processed_contents);
+      const parsedContents = JSON.parse(
+        processed_contents
+      ) as SummaryContentsType[];
       console.log("Parsed contents: ", parsedContents);
-      return JSON.stringify(parsedContents, null, 2);
+      return parsedContents;
     } catch (error) {
       console.error("Error parsing processed contents: ", error);
+      return [{}];
     }
-    return processed_contents;
   };
 
   // @ts-ignore
@@ -119,7 +125,9 @@ const PrivacyInsight = () => {
       return;
     }
     setCurrentState("RETRIEVED_PRIVACY_CONTENTS");
-    const generatedSummary = await generateSummary(contents);
+    const generatedSummary = (await generateSummary(
+      contents
+    )) as unknown as SummaryContentsType[];
     setSummary(generatedSummary);
     setCurrentState("SUMMARY_READY");
   };
@@ -130,11 +138,9 @@ const PrivacyInsight = () => {
 
   return (
     <div>
-      <h1>Guardian Insights</h1>
-      <h2>Summaries</h2>
-      <p>REPLACE: {summary}</p>
       <Insights
         summaryContents={summary}
+        privacyUrl={privacyUrl}
         shouldShow={displayInsight}
         currentState={currentState}
       />

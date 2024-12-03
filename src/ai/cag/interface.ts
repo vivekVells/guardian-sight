@@ -73,6 +73,7 @@ class CAG {
       const response = await this._ai.prompt(prompt);
       console.log("Response for chunk", response);
       output.push(response);
+      await this._ai.destroy();
     }
     console.log("Output: ", output);
     return output.join("<br>");
@@ -111,6 +112,7 @@ class CAG {
       const response = await this._ai.prompt(prompt);
       console.log(`Response for chunk: ${response}`);
       output.push(response);
+      await this._ai.destroy();
     }
 
     const combinedOutput = output.join(" ");
