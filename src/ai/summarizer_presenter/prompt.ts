@@ -39,7 +39,13 @@ Follow these instructions:
 
 8. Do not repeat any category in JSON. If there are multiple points for the category then use the same JSON object to append the multiple lines as a paragraph in the "content" section. Example: {"key": "audio", "title": "Audio", "content": "Messenger utilizes end-to-end encryption for secure messaging. Messenger utilizes end-to-end encryption for secure messaging. Messenger utilizes end-to-end encryption for secure messaging.", "score_color": "green"}.
 
-9. **Return the JSON output as plain text and not Markdown. DO NOT USE MARKDOWN TO OUTPUT JSON ONLY DO IT AS PLAIN TEXT**
+9. Do not add any new sections or categories. Only use the sections mentioned in the instructions.
+
+10. Follow the order of the sections as mentioned in the instructions. It should be in the order of Privacy, Audio, Video, Advertisement, Cookie, and Location.
+
+11. DO NOT CHANGE THE SECTION TITLE. The section title should be the same as mentioned in the instructions.
+
+12. **Return the JSON output as plain text and not Markdown. DO NOT USE MARKDOWN TO OUTPUT JSON ONLY DO IT AS PLAIN TEXT**
     
 
 **EXAMPLE JSON OUTPUT:**
